@@ -1,0 +1,130 @@
+body {
+	margin: 0;
+	background-color: var(--mdc-theme-background);
+}
+
+.drawerTitle {
+	margin: auto;
+	padding: 1rem 1rem 0.5rem 1rem;
+	width: max-content;
+}
+
+.mdc-drawer .mdc-list-item {
+	border-radius: 0;
+}
+
+.mdc-drawer-app-content {
+	max-height: 100vh;
+}
+
+.mdc-top-app-bar {
+	position: absolute;
+}
+
+.networkFull {
+	display: inline-block;
+	font-size: 30px;
+	color: #81C784;
+}
+
+.networkHalf {
+	display: inline-block;
+	font-size: 30px;
+	color: #FFF176;
+}
+
+.networkNone {
+	display: inline-block;
+	font-size: 30px;
+	color: #E57373;
+}
+
+#networkFull {
+	display: none;
+	font-size: 30px;
+	color: #81C784;
+}
+
+#networkHalf {
+	display: inline-block;
+	font-size: 30px;
+	color: #FFF176;
+}
+
+#networkNone {
+	display: none;
+	font-size: 30px;
+	color: #E57373;
+}
+
+.mdc-drawer {
+	width: 100%;
+	left: 0;
+	transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mdc-drawer-app-content {
+	transition: margin-left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mdc-drawer__content {
+	width: 100%;
+	max-width: 500px;
+	margin: auto;
+}
+
+#name, #groupSelect, #groupSelect .mdc-select__anchor, #groupSelect .mdc-select__menu, #groupName, #groupCode {
+	width: -moz-available;
+    width: -webkit-fill-available;
+	width: fill-available;
+}
+
+#name, #groupSelect {
+	margin: 0 1rem;
+}
+
+#name {
+	transition: margin 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#groupName, #groupCode, #membersOuter {
+	display: none;
+}
+
+.configSubmit {
+	display: none;
+}
+
+#centerSection {
+	width: calc(100% - 2rem);
+	max-width: 600px;
+	max-height: calc(100vh - 64px - 3rem);
+	padding: 1.5rem 0;
+	margin: auto;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: max-content 1fr;
+	grid-gap: 1em;
+}
+
+#qry {
+	width: 100%;
+}
+
+#qryAlwaysOnButton {
+	display: inline-block !important;
+}
+
+#results {
+	display: grid;
+	grid-template-columns: repeat(3, max-content);
+	grid-template-rows: auto; 
+	grid-column-gap: 1rem;
+	grid-row-gap: 0.2rem;
+	overflow: auto;
+}
+
+#groupCodeDialogCopy {
+	position: absolute;
+	left: -800px;
+}

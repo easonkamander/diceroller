@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8" />
+		<title>Dice Roller</title>
+		<link rel="stylesheet" href="lib/mdc.css">
+		<link rel="stylesheet" href="main.css">
+	</head>
+	<body>
+		<aside class="mdc-drawer mdc-drawer--dismissible" data-mdc-auto-init="MDCDrawer">
+			<div class="mdc-drawer__content">
+				<div class="drawerTitle mdc-typography mdc-typography--headline6">Dice Roller</div>
+				<nav class="mdc-list">
+					<label id="name" class="mdc-text-field mdc-text-field--with-trailing-icon configOuter" data-mdc-auto-init="MDCTextField" tabindex="0" data-send-order="user" data-send-name="name">
+						<input class="configInput mdc-text-field__input" type="text" aria-labelledby="nameInner">
+						<i class="configSubmit material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">send</i>
+						<span class="configInner mdc-floating-label" id="nameInner">Name</span>
+						<div class="mdc-line-ripple"></div>
+					</label>
+					<div id="groupSelect" class="mdc-select" data-mdc-auto-init="MDCSelect">
+						<div class="mdc-select__anchor">
+							<i class="mdc-select__dropdown-icon"></i>
+							<div class="mdc-select__selected-text"></div>
+							<span class="mdc-floating-label mdc-floating-label--float-above">Group</span>
+							<div class="mdc-line-ripple"></div>
+						</div>
+						<div class="mdc-select__menu mdc-menu mdc-menu-surface">
+							<ul class="mdc-list">
+								<li class="mdc-list-item mdc-list-item--selected" data-value="none" aria-selected="true">
+									None
+								</li>
+								<li class="mdc-list-item" data-value="crt">
+									Create A Group
+								</li>
+								<li class="mdc-list-item" data-value="att">
+									Join A New Group
+								</li>
+							</ul>
+						</div>
+					</div>
+					<label id="groupName" class="mdc-text-field mdc-text-field--with-trailing-icon configOuter" data-mdc-auto-init="MDCTextField" data-send-order="group" data-send-name="name">
+						<input class="configInput mdc-text-field__input" type="text" aria-labelledby="groupNameInner">
+						<i class="configQuit material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">cancel</i>
+						<i class="configSubmit material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">send</i>
+						<span class="configInner mdc-floating-label" id="groupNameInner">Group Name</span>
+						<div class="mdc-line-ripple"></div>
+					</label>
+					<label id="groupCode" class="mdc-text-field mdc-text-field--with-trailing-icon configOuter" data-mdc-auto-init="MDCTextField" data-send-order="group" data-send-name="att">
+						<input class="configInput mdc-text-field__input" type="text" aria-labelledby="groupCodeInner">
+						<i class="configSubmit material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">send</i>
+						<span class="configInner mdc-floating-label" id="groupCodeInner">Group Code</span>
+						<div class="mdc-line-ripple"></div>
+					</label>
+					<div id="membersOuter">
+						<br />
+						<div class="mdc-typography mdc-typography--body1">Members</div>
+						<ul id="membersList" class="mdc-list"></ul>
+					</div>
+				</nav>
+			</div>
+		</aside>
+		<div class="mdc-drawer-app-content">
+			<header class="mdc-top-app-bar mdc-top-app-bar--fixed" data-mdc-auto-init="MDCTopAppBar">
+				<div class="mdc-top-app-bar__row">
+					<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+						<button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+						<span class="mdc-top-app-bar__title">Dice Roller</span>
+					</section>
+					<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+						<i class="networkFull material-icons mdc-top-app-bar__navigation-icon" id="networkFull">wifi</i>
+						<i class="networkHalf material-icons mdc-top-app-bar__navigation-icon" id="networkHalf">network_check</i>
+						<i class="networkNone material-icons mdc-top-app-bar__navigation-icon" id="networkNone">wifi_off</i>
+					</section>
+				</div>
+			</header>
+			<div class="mdc-top-app-bar--fixed-adjust"></div>
+			<div id="centerSection">
+				<label id="qry" class="mdc-text-field mdc-text-field--with-trailing-icon configOuter" data-mdc-auto-init="MDCTextField" data-send-order="group" data-send-name="qry">
+					<input class="configInput mdc-text-field__input" type="text" aria-labelledby="qryInner">
+					<i id="qryAlwaysOnButton" class="configSubmit material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">send</i>
+					<span class="configInner mdc-floating-label" id="qryInner">Roll</span>
+					<div class="mdc-line-ripple"></div>
+				</label>
+				<div id="results" class="mdc-typography mdc-typography--body1">
+					<div>Name</div>
+					<div>#</div>
+					<div id="insert">Roll</div>
+				</div>	
+			</div>
+		</div>
+		<div id="groupQuitDialog" class="mdc-dialog" data-mdc-auto-init="MDCDialog">
+			<div class="mdc-dialog__container">
+				<div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="groupQuitDialogTitle" aria-describedby="groupQuitDialogTitleContent">
+					<h2 class="mdc-dialog__title" id="groupQuitDialogTitle">Leave Group?</h2>
+					<div class="mdc-dialog__content" id="groupQuitDialogTitleContent">Are you sure you would like to leave this group?</div>
+					<footer class="mdc-dialog__actions">
+						<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+							<div class="mdc-button__ripple"></div>
+							<span class="mdc-button__label">No</span>
+						</button>
+						<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+							<div class="mdc-button__ripple"></div>
+							<span class="mdc-button__label">Yes</span>
+						</button>
+					</footer>
+				</div>
+			</div>
+			<div class="mdc-dialog__scrim"></div>
+		</div>
+		<div id="groupCodeDialog" class="mdc-dialog" data-mdc-auto-init="MDCDialog">
+			<div class="mdc-dialog__container">
+				<div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="groupCodeDialogTitle" aria-describedby="groupCodeDialogTitleContent">
+					<h2 class="mdc-dialog__title" id="groupCodeDialogTitle">Group Code</h2>
+					<div class="mdc-dialog__content" id="groupCodeDialogTitleContent"></div>
+					<input type="text" readonly value="" id="groupCodeDialogCopy">
+					<footer class="mdc-dialog__actions">
+						<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="okay">
+							<div class="mdc-button__ripple"></div>
+							<span class="mdc-button__label">Okay</span>
+						</button>
+						<button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="copy">
+							<div class="mdc-button__ripple"></div>
+							<span class="mdc-button__label">Copy</span>
+						</button>
+					</footer>
+				</div>
+			</div>
+			<div class="mdc-dialog__scrim"></div>
+		</div>
+		<script src="lib/mdc.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>
