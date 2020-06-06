@@ -1,3 +1,6 @@
 envdiceroller/
 .vscode/
 old/
+host/outline.txt
+host/parser_new.py
+host/parser_new2.py
