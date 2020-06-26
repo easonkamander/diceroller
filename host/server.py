@@ -83,11 +83,13 @@ class User:
 					self.group = None
 					await self.send({'order': 'group', 'rmv': True})
 			if 'qry' in msg and self.group is not None:
-				await self.group.send({'qry': {
-					'name': self.name,
-					'req': msg['qry'],
-					'res': parser.getRoll(msg['qry'])
-				}})
+				out = parser.parse(msg['qry'], self.key)
+				if out[0] and out[1] is not None:
+					await self.group.send({'qry': {
+						'name': self.name,
+						'req': out[1][0],
+						'res': str(out[1][1])
+					}})
 		else:
 			if 'ping' in msg:
 				asyncio.create_task(self.ping())
